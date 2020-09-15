@@ -1,0 +1,32 @@
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <title>Hello Vue,js</title>
+    <link rel="stylesheet" href="css/main.css" />
+  </head>
+  <body>
+    <div id="app">
+      <h2>TODO List</h2>
+      <!-- 404になることを防ぐ（submitを行わないようにする） -->
+      <form v-on:submit.prevent>
+        <input type="text" v-model="newItem" />
+        <!-- 追加ボタン -->
+        <button v-on:click="addItem">Add</button>
+      </form>
+      <ul>
+        <!-- todoのitemをtodosの中にリスト表示していく（todo（バリュー）のindex（キー）も配列にする） -->
+        <li v-for=" (todo, index) in todos">
+          <!-- タスク完了未完了用チェックボックス -->
+          <input type="checkbox" v-model="todo.isDone" />
+          <!-- v-bind:classでclassにdoneclassを付与cssを動的に変更 -->
+          <span v-bind:class="{ done: todo.isDone}"> {{todo.item}}</span>
+          <!-- 削除ボタン(配列のindexを渡すことでどのitemか伝える) -->
+          <button v-on:click="deleteItem(index)">Delete</button>
+        </li>
+      </ul>
+      <pre>{{$data}}</pre>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <script src="js/main.js"></script>
+  </body>
+</html>
